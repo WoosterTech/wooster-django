@@ -12,11 +12,7 @@ from django.utils.translation import gettext_lazy as _
 from wooster_django.users.forms import UserAdminChangeForm
 from wooster_django.users.models import User
 from wooster_django.users.tests.factories import UserFactory
-from wooster_django.users.views import (
-    UserRedirectView,
-    UserUpdateView,
-    user_detail_view,
-)
+from wooster_django.users.views import UserRedirectView, UserUpdateView, user_detail_view
 
 pytestmark = pytest.mark.django_db
 
