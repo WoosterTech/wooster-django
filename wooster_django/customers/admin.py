@@ -7,6 +7,8 @@ from .models import Customer
 # Register your models here.
 class ProjectInline(admin.TabularInline):
     model = Project
+    exclude = ["created_by"]
+    extra = 0
 
 
 @admin.register(Customer)
