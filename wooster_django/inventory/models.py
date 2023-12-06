@@ -1,3 +1,4 @@
+import shortuuid
 from colorfield.fields import ColorField
 from django.conf import settings
 from django.db import models
@@ -130,4 +131,42 @@ class Item(BaseModel):
         ordering = ["manufacturer", "is_parent_item", "name"]
 
 
-# class Stock(BaseModel):
+class History(BaseModel):
+    name = None
+    item = models.ForeignKey("inventory.Item", verbose_name=_("item"), on_delete=models.CASCADE)
+    amount = models.DecimalField(_("amount"), help_text=_("always <= 0"), max_digits=5, decimal_places=2)
+
+    class Meta:
+        ordering = ["-created_date"]
+        verbose_name_plural = _("histories")
+
+    class HistoryType(models.TextChoices):
+        ADD = "add", _("Add")
+        SUBTRACT = "subtract", _("Subtract")
+        CORRECT = "correct", _("Correct")
+        INITIAL = "initial", _("Initial")
+
+    history_type = models.CharField(
+        _("history type"), max_length=10, choices=HistoryType.choices, default=HistoryType.SUBTRACT
+    )
+
+    def __str__(self):
+        return f"{self.item} | {self.created_date}"
+
+    def save(self, *args, **kwargs):
+        if self._state.adding:
+            EditItem = self.item
+            if self.history_type == self.HistoryType.ADD:
+                EditItem.in_stock_amount += self.amount
+            elif self.history_type == self.HistoryType.SUBTRACT:
+                EditItem.in_stock_amount -= self.amount
+            elif self.history_type == self.HistoryType.CORRECT or self.history_type == self.HistoryType.INITIAL:
+                EditItem.in_stock_amount = self.amount
+            else:
+                raise Exception("Invalid history type")
+
+            EditItem.save()
+
+            slug = shortuuid.uuid()[:10]
+            self.slug = slugify(slug)
+        return super().save(*args, **kwargs)
