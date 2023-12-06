@@ -77,6 +77,7 @@ DJANGO_APPS = [
     "django.forms",
 ]
 THIRD_PARTY_APPS = [
+    "colorfield",
     "crispy_forms",
     "crispy_bootstrap5",
     "allauth",
@@ -87,6 +88,9 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     "wooster_django.users",
     # Your stuff: custom apps go here
+    "wooster_django.customers",
+    "wooster_django.inventory",
+    "wooster_django.projects",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -286,6 +290,9 @@ SOCIALACCOUNT_FORMS = {"signup": "wooster_django.users.forms.UserSocialSignupFor
 # https://django-compressor.readthedocs.io/en/latest/quickstart/#installation
 INSTALLED_APPS += ["compressor"]
 STATICFILES_FINDERS += ["compressor.finders.CompressorFinder"]
+
+# https://django-phonenumber-field.readthedocs.io/en/latest/reference.html
+PHONENUMBER_DEFAULT_REGION = "US"
 
 # Your stuff...
 # ------------------------------------------------------------------------------
