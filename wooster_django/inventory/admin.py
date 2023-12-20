@@ -60,7 +60,7 @@ class ItemAdmin(admin.ModelAdmin):
     list_editable = ["in_stock_amount", "in_stock_amount_unit"]
     search_fields = ["name", "internal_identifier", "vendor_identifier", "common_color"]
     filter_horizontal = ["alternate_manufacturers", "alternate_vendors", "item_categories"]
-    list_filter = ["manufacturer", "vendor", "in_stock_amount_unit", "common_color"]
+    list_filter = ["manufacturer", "vendor", "in_stock_amount_unit", "common_color", "is_parent_item"]
 
 
 @admin.register(History)

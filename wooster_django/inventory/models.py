@@ -1,6 +1,8 @@
 import shortuuid
+from basemodels.models import BaseModel
 from colorfield.fields import ColorField
-from django.conf import settings
+
+# from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from slugify import slugify
@@ -22,25 +24,25 @@ COMMON_COLOR_PALETTE = [
 
 
 # Create your models here.
-class BaseModel(models.Model):
-    """Base model for standardization. Includes generating slug."""
+# class BaseModel(models.Model):
+#     """Base model for standardization. Includes generating slug."""
 
-    name = models.CharField(max_length=50)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("created by"), on_delete=models.PROTECT)
-    slug = models.SlugField(unique=True, editable=False)
-    created_date = models.DateTimeField(_("created date"), auto_now_add=True)
-    modified_date = models.DateTimeField(_("modified date"), auto_now=True)
+#     name = models.CharField(max_length=50)
+#     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("created by"), on_delete=models.PROTECT)
+#     slug = models.SlugField(unique=True, editable=False)
+#     created_date = models.DateTimeField(_("created date"), auto_now_add=True)
+#     modified_date = models.DateTimeField(_("modified date"), auto_now=True)
 
-    class Meta:
-        abstract = True
+#     class Meta:
+#         abstract = True
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
+#     def save(self, *args, **kwargs):
+#         if not self.slug:
+#             self.slug = slugify(self.name)
+#         super().save(*args, **kwargs)
 
 
 class ItemCategory(BaseModel):
@@ -134,7 +136,7 @@ class Item(BaseModel):
 class History(BaseModel):
     name = None
     item = models.ForeignKey("inventory.Item", verbose_name=_("item"), on_delete=models.CASCADE)
-    amount = models.DecimalField(_("amount"), help_text=_("always <= 0"), max_digits=5, decimal_places=2)
+    amount = models.DecimalField(_("amount"), help_text=_("always >= 0"), max_digits=5, decimal_places=2)
 
     class Meta:
         ordering = ["-created_date"]

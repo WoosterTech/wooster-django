@@ -83,13 +83,16 @@ THIRD_PARTY_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "wooster_django.basemodels",
 ]
 
 LOCAL_APPS = [
     "wooster_django.users",
     # Your stuff: custom apps go here
+    # "wooster_django.containers",
     "wooster_django.customers",
     "wooster_django.inventory",
+    "wooster_django.orders",
     "wooster_django.projects",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
