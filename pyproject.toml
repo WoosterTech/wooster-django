@@ -12,10 +12,17 @@ plugins = ["django_coverage_plugin"]
 
 # ==== Ruff ====
 [tool.ruff]
+fix = true
 line-length = 119
 select = ["E", "F", "B"]
 unfixable = ["B"]
 target-version = "py311"
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.ruff.lint]
+fixable = ["ALL"]
 
 
 # ==== black ====
@@ -42,6 +49,9 @@ warn_unused_ignores = true
 warn_redundant_casts = true
 warn_unused_configs = true
 plugins = ["mypy_django_plugin.main"]
+
+[tool.mypy_django_plugin]
+ignore_missing_model_attributes = true
 
 [[tool.mypy.overrides]]
 # Django migrations should not produce any errors:

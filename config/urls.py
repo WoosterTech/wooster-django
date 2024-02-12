@@ -14,6 +14,7 @@ urlpatterns = [
     path("users/", include("wooster_django.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
+    # path("receipts/", include("wooster_django.receipts.urls", namespace="receipts")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

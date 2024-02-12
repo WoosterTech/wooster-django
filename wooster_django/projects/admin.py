@@ -1,12 +1,11 @@
 from django.contrib import admin
 
-from .models import DocumentNumber, Project
-
+from .models import Project
 
 # Register your models here.
-@admin.register(DocumentNumber)
-class DocumentNumberAdmin(admin.ModelAdmin):
-    list_display = ["document", "last_number", "next_counter"]
+# @admin.register(DocumentNumbers)
+# class DocumentNumberAdmin(admin.ModelAdmin):
+#     list_display = ["document", "last_number", "next_counter"]
 
 
 @admin.register(Project)

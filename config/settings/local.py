@@ -58,3 +58,5 @@ INSTALLED_APPS += ["django_extensions"]  # noqa: F405
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+# print(f"'DATABASES': {DATABASES}")
+# print(f"'INSTALLED_APPS': {INSTALLED_APPS}")

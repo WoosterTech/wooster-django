@@ -276,3 +276,5 @@ mailpit
 wooster_django/media/
 
 .pytest_cache/
+
+db.sqlite3

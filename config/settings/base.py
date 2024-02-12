@@ -3,22 +3,25 @@ Base settings to build other settings files upon.
 """
 from pathlib import Path
 
-import environ
+import environ  # type:ignore
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # wooster_django/
 APPS_DIR = BASE_DIR / "wooster_django"
 env = environ.Env()
+print(f"'APPS_DIR': {APPS_DIR}")
 
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
 if READ_DOT_ENV_FILE:
     # OS environment variables take precedence over variables from .env
     env.read_env(str(BASE_DIR / ".env"))
+    print(f"'BASE_DIR': {BASE_DIR}")
 
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
 DEBUG = env.bool("DJANGO_DEBUG", False)
+print(f"DEBUG: {DEBUG}")
 # Local time zone. Choices are
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # though not all of them may be available with every OS.
@@ -52,6 +55,14 @@ DATABASES = {
         default="postgres://localhost/wooster_django",
     ),
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
+
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -83,17 +94,18 @@ THIRD_PARTY_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "wooster_django.basemodels",
 ]
 
 LOCAL_APPS = [
     "wooster_django.users",
     # Your stuff: custom apps go here
     # "wooster_django.containers",
+    "wooster_django.basemodels",
     "wooster_django.customers",
     "wooster_django.inventory",
     "wooster_django.orders",
     "wooster_django.projects",
+    "wooster_django.receipts",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

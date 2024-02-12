@@ -1,11 +1,13 @@
 import shortuuid
 from basemodels.models import BaseModel
-from colorfield.fields import ColorField
+from colorfield.fields import ColorField  # type:ignore
 
 # from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from slugify import slugify
+
+# from wooster_django.projects.models import BasalModel
 
 # Chosen from https://htmlcolorcodes.com/color-names
 COMMON_COLOR_PALETTE = [
