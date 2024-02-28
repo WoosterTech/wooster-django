@@ -110,7 +110,7 @@ indent_size = 2
 # *'package-mode' was unexpected
 # package-mode = false
 name = "wooster-django"
-version = "0.1.0"
+version = "0.2.0"
 description = ""
 authors = ["Karl Wooster <karl@woostertech.com>"]
 readme = "README.md"
