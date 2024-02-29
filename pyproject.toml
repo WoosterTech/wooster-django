@@ -155,7 +155,7 @@ psycopg = {extras = ["binary"], version = "^3.1.18"}
 pytest = "^8.0.2"
 pytest-sugar = "^1.0.0"
 types-python-slugify = "^8.0.2.20240127"
-ruff = "^0.2.2"
+ruff = "^0.3.0"
 coverage = "^7.4.3"
 djlint = "^1.34.1"
 pylint-django = "^2.5.5"
