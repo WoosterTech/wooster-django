@@ -22,3 +22,5 @@ crispy-bootstrap5==2023.10  # https://github.com/django-crispy-forms/crispy-boot
 django-phonenumber-field[phonenumberslite]==7.2.0  # https://github.com/stefanfoulis/django-phonenumber-field
 django-compressor==4.4  # https://github.com/django-compressor/django-compressor
 django-redis==5.4.0  # https://github.com/jazzband/django-redis
+dj-database-url==2.1.0  #
+django-constance==3.1.0
