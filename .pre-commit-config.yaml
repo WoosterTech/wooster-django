@@ -1,13 +1,14 @@
-exclude: '^docs/|/migrations/|devcontainer.json'
-default_stages: [commit]
-
+ci:
+  autoupdate_schedule: weekly
+  skip: []
+  submodules: false
+default_stages:
+  - commit
+exclude: ^docs/|/migrations/|devcontainer.json
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
-    hooks:
+  - hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
-      # - id: check-json
       - id: check-toml
       - id: check-xml
       - id: check-yaml
@@ -16,60 +17,58 @@ repos:
       - id: check-case-conflict
       - id: check-docstring-first
       - id: detect-private-key
-
-  - repo: https://gitlab.com/bmares/check-json5
-    rev: v1.0.0
-    hooks:
+    repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+  - hooks:
       - id: check-json5
-
-  - repo: https://github.com/pre-commit/mirrors-prettier
+    repo: https://gitlab.com/bmares/check-json5
+    rev: v1.0.0
+  - hooks:
+      - args:
+          - --tab-width
+          - '2'
+          - --single-quote
+        exclude: wooster_django/templates/
+        id: prettier
+    repo: https://github.com/pre-commit/mirrors-prettier
     rev: v3.1.0
-    hooks:
-      - id: prettier
-        args: ['--tab-width', '2', '--single-quote']
-        exclude: 'wooster_django/templates/'
-
-  - repo: https://github.com/adamchainz/django-upgrade
-    rev: '1.15.0'
-    hooks:
-      - id: django-upgrade
-        args: ['--target-version', '4.2']
-
-  - repo: https://github.com/asottile/pyupgrade
+  - hooks:
+      - args:
+          - --target-version
+          - '4.2'
+        id: django-upgrade
+    repo: https://github.com/adamchainz/django-upgrade
+    rev: 1.15.0
+  - hooks:
+      - args:
+          - --py311-plus
+        id: pyupgrade
+    repo: https://github.com/asottile/pyupgrade
     rev: v3.15.0
-    hooks:
-      - id: pyupgrade
-        args: [--py311-plus]
-
-  - repo: https://github.com/astral-sh/ruff-pre-commit
+  - hooks:
+      - args:
+          - --fix
+          - --exit-non-zero-on-fix
+        id: ruff
+    repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.1.6
-    hooks:
-      - id: ruff
-        args: [--fix, --exit-non-zero-on-fix]
-
-  - repo: https://github.com/psf/black
-    rev: 23.11.0
-    hooks:
+  - hooks:
       - id: black
-
-  - repo: https://github.com/PyCQA/isort
-    rev: 5.12.0
-    hooks:
+    repo: https://github.com/psf/black
+    rev: 23.11.0
+  - hooks:
       - id: isort
-
-  # - repo: https://github.com/PyCQA/flake8
-  #   rev: 6.1.0
-  #   hooks:
-  #     - id: flake8
-
-  - repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.34.0
-    hooks:
+    repo: https://github.com/PyCQA/isort
+    rev: 5.12.0
+  - hooks:
       - id: djlint-reformat-django
       - id: djlint-django
-
-# sets up .pre-commit-ci.yaml to ensure pre-commit dependencies stay up to date
-ci:
-  autoupdate_schedule: weekly
-  skip: []
-  submodules: false
+    repo: https://github.com/Riverside-Healthcare/djLint
+    rev: v1.34.0
+  - hooks:
+      - id: commitizen
+      - id: commitizen-branch
+        stages:
+          - push
+    repo: https://github.com/commitizen-tools/commitizen
+    rev: v3.14.1
