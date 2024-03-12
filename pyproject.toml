@@ -17,6 +17,7 @@ line-length = 119
 select = ["E", "F", "B"]
 unfixable = ["B"]
 target-version = "py311"
+exclude = ["migrations"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -105,3 +106,10 @@ indent_size = 2
 
 [tool.djlint.js]
 indent_size = 2
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "v$version"
+version_scheme = "pep440"
+version_provider = "pep621"
+update_changelog_on_bump = true

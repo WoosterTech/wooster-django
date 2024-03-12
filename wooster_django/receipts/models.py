@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from slugify import slugify
 
@@ -27,15 +28,16 @@ class ReceiptBaseModel(models.Model):
 
 
 class Merchant(ReceiptBaseModel):
-    pass
+    def get_absolute_url(self):
+        return reverse("receipts:detail_merchant", kwargs={"slug": self.slug})
 
 
 class Receipt(ReceiptBaseModel):
     name = None  # type:ignore
-    merchant = models.ForeignKey(Merchant, verbose_name=_("Merchant"), on_delete=models.PROTECT)
-    transaction_date = models.DateField(_("Transaction Date"), auto_now=False, auto_now_add=False)
+    merchant = models.ForeignKey(Merchant, verbose_name=_("Merchant"), on_delete=models.PROTECT, null=True)
+    transaction_date = models.DateField(_("Transaction Date"), auto_now=False, auto_now_add=False, null=True)
     receipt_file = models.FileField(_("Receipt"), upload_to="uploads", max_length=100)
-    analyze_result = models.JSONField(_("Analyze Result"))
+    analyze_result = models.JSONField(_("Analyze Result"), null=True)
     slug = models.UUIDField(_("slug"), auto_created=True)
 
 
