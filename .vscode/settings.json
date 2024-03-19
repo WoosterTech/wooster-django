@@ -9,5 +9,8 @@
   },
   "emmet.includeLanguages": {
     "django-html": "html"
+  },
+  "files.associations": {
+    "*.in": "pip-requirements"
   }
 }

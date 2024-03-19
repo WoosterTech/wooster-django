@@ -1,0 +1,27 @@
+python-slugify==8.0.4  # https://github.com/un33k/python-slugify
+Pillow==10.2.0  # https://github.com/python-pillow/Pillow
+# rcssmin==1.1.0 --install-option="--without-c-extensions"  #
+# https://github.com/ndparker/rcssmin
+# rcssmin==1.1.2 # https://github.com/ndparker/rcssmin
+argon2-cffi==23.1.0  # https://github.com/hynek/argon2_cffi
+shortuuid==1.0.13  # https://github.com/skorokithakis/shortuuid/
+whitenoise==6.6.0  # https://github.com/evansd/whitenoise
+redis==5.0.3  # https://github.com/redis/redis-py
+celery==5.3.6
+# receiptparser @ ../../receiptparser
+furl==2.1.3
+
+# Django
+# ------------------------------------------------------------------------------
+django==5.0.3  # https://www.djangoproject.com/
+django-colorfield==0.11.0  # https://github.com/fabiocaccamo/django-colorfield
+django-environ==0.11.2  # https://github.com/joke2k/django-environ
+django-model-utils==4.4.0  # https://github.com/jazzband/django-model-utils
+django-allauth==0.61.1  # https://github.com/pennersr/django-allauth
+django-crispy-forms==2.1  # https://github.com/django-crispy-forms/django-crispy-forms
+crispy-bootstrap5==2024.2  # https://github.com/django-crispy-forms/crispy-bootstrap5
+django-phonenumber-field[phonenumberslite]==7.3.0  # https://github.com/stefanfoulis/django-phonenumber-field
+django-compressor @ git+https://github.com/django-compressor/django-compressor.git  # https://github.com/django-compressor/django-compressor
+django-redis==5.4.0  # https://github.com/jazzband/django-redis
+dj-database-url==2.1.0  # https://github.com/jazzband/dj-database-url/
+django-constance[redis]==3.1.0  # https://github.com/jazzband/django-constance
