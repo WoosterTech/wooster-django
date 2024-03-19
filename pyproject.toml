@@ -113,5 +113,5 @@ tag_format = "v$version"
 version_scheme = "pep440"
 version_provider = "commitizen"
 major-version-zero = true
-version = "0.2.0"
+version = "0.3.0"
 # update_changelog_on_bump = true
