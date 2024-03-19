@@ -7,6 +7,9 @@
     "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.rulers": [88, 119]
   },
+  "[shellscript]": {
+    "files.eol": "\n"
+  },
   "emmet.includeLanguages": {
     "django-html": "html"
   },

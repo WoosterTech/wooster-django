@@ -95,7 +95,8 @@ THIRD_PARTY_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "constance",
+    # add back when there's a configurable setting, I guess
+    # "constance",
 ]
 
 LOCAL_APPS = [
