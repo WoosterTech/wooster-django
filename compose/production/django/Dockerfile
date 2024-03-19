@@ -20,7 +20,7 @@ COPY ./requirements .
 
 # Create Python Dependency and Sub-Dependency Wheels.
 RUN pip wheel --wheel-dir /usr/src/app/wheels  \
-  -r linux-py3.11-${BUILD_ENVIRONMENT}.txt
+  -r ${BUILD_ENVIRONMENT}.txt
 
 
 # Python 'run' stage
@@ -89,9 +89,9 @@ RUN chown -R django:django ${APP_HOME}
 
 USER django
 
-RUN DATABASE_URL="" \
-  CELERY_BROKER_URL="" \
-  DJANGO_SETTINGS_MODULE="config.settings.test" \
-  python manage.py compilemessages
+# RUN DATABASE_URL="" \
+#   CELERY_BROKER_URL="" \
+#   DJANGO_SETTINGS_MODULE="config.settings.test" \
+#   python manage.py compilemessages
 
 ENTRYPOINT ["/entrypoint"]

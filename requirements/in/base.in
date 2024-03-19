@@ -25,3 +25,4 @@ django-compressor @ git+https://github.com/django-compressor/django-compressor.g
 django-redis==5.4.0  # https://github.com/jazzband/django-redis
 dj-database-url==2.1.0  # https://github.com/jazzband/dj-database-url/
 django-constance[redis]==3.1.0  # https://github.com/jazzband/django-constance
+django-extensions~=3.2.3  # https://github.com/django-extensions/django-extensions
