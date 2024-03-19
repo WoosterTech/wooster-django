@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ReceiptsConfig(AppConfig):
+class ToolsConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "wooster_django.receipts"
+    name = "wooster_django.tools"

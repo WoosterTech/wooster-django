@@ -1,9 +1,9 @@
 from django.contrib import admin
 
 # from inventory.models import Item
-from projects.models import Project
+from wooster_django.projects.models import Project
 
-from .models import Order, OrderItem
+from .models import DocumentNumber, Invoice, InvoiceLine, Order, OrderItem
 
 
 # Register your models here.
@@ -28,3 +28,26 @@ class OrderAdmin(admin.ModelAdmin):
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
     list_display = ["order", "item", "extended_price"]
+
+
+class InvoiceLineInline(admin.TabularInline):
+    model = InvoiceLine
+    readonly_fields = ["rank", "extended_price"]
+    fields = ["rank", "description", "quantity", "unit_price", "extended_price"]
+
+
+@admin.register(Invoice)
+class InvoiceAdmin(admin.ModelAdmin):
+    list_display = ["number", "customer", "status"]
+    list_filter = ["customer"]
+    date_hierarchy = "created"
+    search_fields = ["number", "customer"]
+    readonly_fields = ["status_changed"]
+    inlines = [InvoiceLineInline]
+
+
+@admin.register(DocumentNumber)
+class DocumentNumberAdmin(admin.ModelAdmin):
+    list_display = ["document", "last_number"]
+    search_fields = ["document"]
+    readonly_fields = ["last_number", "last_generated_date"]

@@ -9,9 +9,10 @@ from django.urls import reverse
 
 # from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DetailView, ListView
-from receipts.forms import ReceiptUploadForm
-from receipts.models import Merchant, Receipt
 from shortuuid import uuid
+
+from .forms import ReceiptUploadForm
+from .models import Merchant, Receipt
 
 # from receiptparser.doc_intel_receipt import analyze_receipt
 

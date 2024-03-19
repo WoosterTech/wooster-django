@@ -1,3 +1,6 @@
+{% load static %}
+{% load purchases_extras %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -68,6 +71,10 @@
         font-weight: bold;
       }
 
+      .invoice-box table.terms-field {
+        border: 2px solid #eee;
+      }
+
       @media only screen and (max-width: 600px) {
         .invoice-box table tr.top table td {
           width: 100%;
@@ -118,16 +125,14 @@
             <table>
               <tr>
                 <td class="title">
-                  <img class="logo"
-                       src="../../static/images/logo_color_300w.png"
-                       alt="Messy House Creations Logo" />
+                  <img class="logo" src="{% static "/images/logo_color_300w.png" %}" alt="Messy House Creations Logo" />
                 </td>
                 <td>
-                  Invoice #: 2024-03-07-001
+                  Invoice #: {{ invoice.number }}
                   <br />
-                  Created: March 7, 2024
+                  Created: {{ invoice.created|date:"F j, Y" }}
                   <br />
-                  Due: April 9, 2024
+                  Due: {{ invoice.due_date|date:"F j, Y" }}
                 </td>
               </tr>
             </table>
@@ -145,27 +150,52 @@
                   Pasco, WA 99301
                 </td>
                 <td>
-                  Tri-City Adventist School
+                  {{ invoice.customer.organization_name }}
                   <br />
-                  Celeste Graves
+                  {{ invoice.customer.contact_name }}
                   <br />
-                  treasurer@mytcas.org
+                  {{ invoice.customer.contact_email }}
                 </td>
               </tr>
             </table>
           </td>
         </tr>
+      </table>
+      <table class="invoice-lines">
         <tr class="heading">
-          <td>Item</td>
-          <td>Price</td>
-        </tr>
-        <tr class="item">
-          <td>Custom Engraved Pencils</td>
-          <td>$80.00</td>
-        </tr>
-        <tr class="total">
           <td></td>
-          <td>Total: $80.00</td>
+          <td>Description</td>
+          <td>Quantity</td>
+          <td>Unit Price</td>
+          <td>Extended Price</td>
+        </tr>
+        {% for line in invoice.invoiceline_set.all|dictsort:"rank" %}
+          <tr class="item">
+            <td>{{ line.rank }}</td>
+            <td>{{ line.description }}</td>
+            <td>{{ line.quantity|floatformat:"2g" }}</td>
+            <td>{{ line.unit_price|usd_accounting }}</td>
+            <td>{{ line.extended_price|usd_accounting }}</td>
+          </tr>
+        {% endfor %}
+        <tr class="total">
+          <td colspan=3></td>
+          <td>Total:</td>
+          <td>{{ invoice.grand_total|usd_accounting }}</td>
+        </tr>
+      </table>
+      <table class="terms-field">
+        <tr class="text-heading">
+          <td>Notes</td>
+        </tr>
+        <tr>
+          <td>{{ invoice.notes }}</td>
+        </tr>
+        <tr class="text-heading">
+          <td>Terms</td>
+        </tr>
+        <tr>
+          <td>{{ invoice.terms }}</td>
         </tr>
       </table>
     </div>

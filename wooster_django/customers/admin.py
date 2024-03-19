@@ -1,5 +1,6 @@
 from django.contrib import admin
-from projects.models import Project
+
+from wooster_django.projects.models import Project
 
 from .models import Customer
 
