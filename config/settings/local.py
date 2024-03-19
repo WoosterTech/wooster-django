@@ -26,9 +26,9 @@ CACHES = {
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-host
-EMAIL_HOST = "10.46.119.26"
+EMAIL_HOST = env.str("DJANGO_EMAIL_HOST", default="localhost")
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-port
-EMAIL_PORT = 1025
+EMAIL_PORT = env.int("DJANGO_EMAIL_PORT", default=1025)
 
 # WhiteNoise
 # ------------------------------------------------------------------------------
