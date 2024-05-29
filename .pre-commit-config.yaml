@@ -1,74 +1,67 @@
-ci:
-  autoupdate_schedule: weekly
-  skip: []
-  submodules: false
-default_stages:
-  - commit
-exclude: ^docs/|/migrations/|devcontainer.json
+exclude: "out\\.*"
+default_stages: [commit]
+
+default_language_version:
+  python: python3.11
+
 repos:
-  - hooks:
+  # - repo: https://github.com/Lucas-C/pre-commit-hooks
+  #   rev: v1.5.5
+  #   hooks:
+  #     - id: forbid-crlf
+  #     - id: remove-crlf
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-toml
       - id: check-xml
-      - id: check-yaml
       - id: debug-statements
       - id: check-builtin-literals
       - id: check-case-conflict
       - id: check-docstring-first
       - id: detect-private-key
-    repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
-  - hooks:
-      - id: check-json5
-    repo: https://gitlab.com/bmares/check-json5
+      - id: check-merge-conflict
+      - id: check-yaml
+        args: [ --unsafe ]
+  - repo: https://gitlab.com/bmares/check-json5
     rev: v1.0.0
-  - hooks:
-      - args:
-          - --tab-width
-          - '2'
-          - --single-quote
-        exclude: wooster_django/templates/
-        id: prettier
-    repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v4.0.0-alpha.8
-  - hooks:
-      - args:
-          - --target-version
-          - '5.0'
-        id: django-upgrade
-    repo: https://github.com/adamchainz/django-upgrade
-    rev: 1.16.0
-  - hooks:
-      - args:
-          - --py311-plus
-        id: pyupgrade
-    repo: https://github.com/asottile/pyupgrade
-    rev: v3.15.1
-  - hooks:
-      - args:
-          - --fix
-          - --exit-non-zero-on-fix
-        id: ruff
-    repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.3.3
-  # - hooks:
-  # - id: black
-  #   repo: https://github.com/psf/black
-  #   rev: 23.11.0
-  # - hooks:
-  #     - id: isort
-  #   repo: https://github.com/PyCQA/isort
-  #   rev: 5.12.0
-  - hooks:
-      - id: djlint-reformat-django
-      - id: djlint-django
-    repo: https://github.com/Riverside-Healthcare/djLint
+    hooks:
+      - id: check-json5
+  - repo: https://github.com/adamchainz/django-upgrade
+    rev: 1.18.0
+    hooks:
+    -   id: django-upgrade
+        args: [--target-version, "5.0"]   # Replace with Django version
+  -   repo: https://github.com/asottile/pyupgrade
+      rev: v3.15.2
+      hooks:
+      -   id: pyupgrade
+          args: [--py36-plus,--py37-plus,--py38-plus,--py39-plus,--py310-plus,--py311-plus]
+  -   repo: https://github.com/commitizen-tools/commitizen
+      rev: v3.27.0
+      hooks:
+      -   id: commitizen
+  -   repo: https://github.com/MarcoGorelli/auto-walrus
+      rev: 0.3.4
+      hooks:
+      -   id: auto-walrus
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.4.6
+    hooks:
+      # Run the linter.
+      - id: ruff
+        types: [file, python]
+        args: [ --fix ]
+      # Run the formatter.
+      - id: ruff-format
+  - repo: https://github.com/Riverside-Healthcare/djLint
     rev: v1.34.1
-  - hooks:
-      - id: commitizen
-      # - id: commitizen-branch
-      #   stages:
-      #     - push
-    repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.18.4
+    hooks:
+    - id: djlint-reformat-django
+    - id: djlint-django
+
+
+exclude: "(migrations|data)/.*"

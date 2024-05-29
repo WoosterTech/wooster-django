@@ -52,3 +52,12 @@ services:
     <<: *django
     image: wooster_django_production_flower
     command: /start-flower
+
+  pgadmin:
+    image: dpage/pgadmin4:8
+    env_file:
+      - ./.envs/.production/.pgadmin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
