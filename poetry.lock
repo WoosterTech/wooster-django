@@ -2789,4 +2789,4 @@ production = ["django-anymail", "gunicorn", "hiredis"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "714a244d4763c7f9fb334df680ed5710d19180d472e811120174053ce51386e9"
+content-hash = "2c3940fb0bfd704be9b68832729d95d3fcfabbe0064e7fcc166ab8d97ad50daa"
