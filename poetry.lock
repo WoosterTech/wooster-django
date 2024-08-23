@@ -1848,7 +1848,6 @@ files = [
 
 [package.dependencies]
 psycopg-binary = {version = "3.2.1", optional = true, markers = "implementation_name != \"pypy\" and extra == \"binary\""}
-psycopg-c = {version = "3.2.1", optional = true, markers = "implementation_name != \"pypy\" and extra == \"c\""}
 typing-extensions = ">=4.4"
 tzdata = {version = "*", markers = "sys_platform == \"win32\""}
 
@@ -1920,16 +1919,6 @@ files = [
     {file = "psycopg_binary-3.2.1-cp39-cp39-musllinux_1_2_ppc64le.whl", hash = "sha256:788ffc43d7517c13e624c83e0e553b7b8823c9655e18296566d36a829bfb373f"},
     {file = "psycopg_binary-3.2.1-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:21927f41c4d722ae8eb30d62a6ce732c398eac230509af5ba1749a337f8a63e2"},
     {file = "psycopg_binary-3.2.1-cp39-cp39-win_amd64.whl", hash = "sha256:921f0c7f39590763d64a619de84d1b142587acc70fd11cbb5ba8fa39786f3073"},
-]
-
-[[package]]
-name = "psycopg-c"
-version = "3.2.1"
-description = "PostgreSQL database adapter for Python -- C optimisation distribution"
-optional = true
-python-versions = ">=3.8"
-files = [
-    {file = "psycopg_c-3.2.1.tar.gz", hash = "sha256:2d09943cc8a855c42c1e23b4298957b7ce8f27bf3683258c52fd139f601f7cda"},
 ]
 
 [[package]]
@@ -2795,9 +2784,9 @@ files = [
 brotli = ["brotli"]
 
 [extras]
-production = ["django-anymail", "gunicorn", "hiredis", "psycopg"]
+production = ["django-anymail", "gunicorn", "hiredis"]
 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "478466c662a8ab5577494d09a8b0e6dae38f7c844dac1845ce7c58b82c17ebac"
+content-hash = "714a244d4763c7f9fb334df680ed5710d19180d472e811120174053ce51386e9"
