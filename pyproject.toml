@@ -175,6 +175,14 @@ factory-boy = "^3.3.1"
 django-coverage-plugin = "^3.1.0"
 pytest-django = "^4.8.0"
 
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "v$version"
+version_scheme = "pep440"
+version_provider = "poetry"
+update_changelog_on_bump = true
+major_version_zero = true
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
